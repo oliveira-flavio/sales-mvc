@@ -2,12 +2,15 @@ using Microsoft.EntityFrameworkCore;
 using sales_mvc.Data;
 var builder = WebApplication.CreateBuilder(args);
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 builder.Services.AddDbContext<sales_mvcContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("sales_mvcContext"), builder => 
     builder.MigrationsAssembly("sales-mvc")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<SeedingService>();
 
 var app = builder.Build();
 
@@ -17,6 +20,14 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+}
+
+// Resolve injeção de dependência SeedingService
+using (var serviceScope = app.Services.CreateScope())
+{
+    var services = serviceScope.ServiceProvider;
+    var seedingService = services.GetRequiredService<SeedingService>();
+    seedingService.Seed();
 }
 
 app.UseHttpsRedirection();
