@@ -1,4 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using sales_mvc.Data;
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<sales_mvcContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("sales_mvcContext"), builder => 
+    builder.MigrationsAssembly("sales-mvc")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
