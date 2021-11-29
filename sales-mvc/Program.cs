@@ -1,7 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using sales_mvc.Data;
+using sales_mvc.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
+// Conserta problema com data no Postgress com .Net 6
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 builder.Services.AddDbContext<sales_mvcContext>(options =>
@@ -11,6 +14,7 @@ builder.Services.AddDbContext<sales_mvcContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<SeedingService>();
+builder.Services.AddScoped<SellerService>();
 
 var app = builder.Build();
 
