@@ -51,7 +51,7 @@ namespace sales_mvc.Data.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("SellerId")
                         .HasColumnType("integer");
@@ -78,7 +78,7 @@ namespace sales_mvc.Data.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<DateTime>("BirthDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("DepartmentId")
                         .HasColumnType("integer");

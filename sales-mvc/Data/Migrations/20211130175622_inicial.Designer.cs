@@ -12,8 +12,8 @@ using sales_mvc.Data;
 namespace sales_mvc.Data.Migrations
 {
     [DbContext(typeof(sales_mvcContext))]
-    [Migration("20211128183226_outras-entidades")]
-    partial class outrasentidades
+    [Migration("20211130175622_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,7 +53,7 @@ namespace sales_mvc.Data.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("SellerId")
                         .HasColumnType("integer");
@@ -80,7 +80,7 @@ namespace sales_mvc.Data.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<DateTime>("BirthDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("DepartmentId")
                         .HasColumnType("integer");
